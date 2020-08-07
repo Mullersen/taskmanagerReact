@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import MyProject from './MyProject.js';
 import Home from './Home.js';
+import NewProject from './NewProject.js';
+
 //import Task from './components/Task';
 
 class App extends Component {
@@ -13,6 +15,7 @@ class App extends Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
               <li><Link to={'/'} className="nav-link"> Home </Link></li>
+              <li><Link to={'/newproject'} className="nav-link">New Project</Link></li>
             </ul>
             </nav>
             <hr />
@@ -23,6 +26,7 @@ class App extends Component {
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/myproject' component={MyProject} />
+                <Route path='/newproject' component={NewProject} />
             </Switch>
           </div>
         </Router>
