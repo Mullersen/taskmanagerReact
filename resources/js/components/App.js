@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Home from './components/Home';
-import Project from './components/Project';
+import MyProject from './MyProject.js';
+import Home from './Home.js';
 //import Task from './components/Task';
 
 class App extends Component {
@@ -17,16 +17,17 @@ class App extends Component {
             </nav>
             <hr />
             <div className="card">
-                <li><Link to={'/Project'} className="nav-link">Project</Link></li>
+                <li><Link to={'/myproject'} className="nav-link">Project</Link></li>
             </div>
+
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/project' component={Project} />
+                <Route path='/myproject' component={MyProject} />
             </Switch>
           </div>
         </Router>
       );
     }
   }
-  
+
   export default App;
