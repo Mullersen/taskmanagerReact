@@ -12,6 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+Route::get('/getprojects', 'ProjectController@getProjects');
+Route::post('/uploadnewproject', 'ProjectController@newProject');
 Route::view('/{path?}', 'welcome');
