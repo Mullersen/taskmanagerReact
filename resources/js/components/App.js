@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import MyProject from './MyProject.js';
+
 import Home from './Home.js';
 import NewProject from './NewProject.js';
 
@@ -19,13 +19,9 @@ class App extends Component {
             </ul>
             </nav>
             <hr />
-            <div className="card">
-                <li><Link to={'/myproject'} className="nav-link">Project</Link></li>
-            </div>
 
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/myproject' component={MyProject} />
                 <Route path='/newproject' component={NewProject} />
             </Switch>
           </div>
