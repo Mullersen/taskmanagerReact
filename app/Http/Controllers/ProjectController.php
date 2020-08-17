@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function getProjects(){
-        $projects = \App\Project::all();
+        $projects = \App\Project::where('is_completed', false)
+        ->orderBy('created_at', 'DESC')
+        ->get();
         return response()->json(['projects' => $projects]);
     }
 
@@ -18,6 +20,11 @@ class ProjectController extends Controller
         $project->is_completed = false;
         $project->save();
         return response()->json(['response'=>'success']);
+    }
+    public function getProject(Request $request){
+        $project = \App\Project::where('title', $request->title)->with('tasks')->get();
+        
+        return response()->json(['project'=> $project]);
     }
 
 }

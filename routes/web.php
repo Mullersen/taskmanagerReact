@@ -13,5 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/getprojects', 'ProjectController@getProjects');
+Route::post('/getproject', 'ProjectController@getProject');
 Route::post('/uploadnewproject', 'ProjectController@newProject');
 Route::view('/{path?}', 'welcome');
