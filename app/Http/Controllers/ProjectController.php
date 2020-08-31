@@ -26,5 +26,14 @@ class ProjectController extends Controller
         
         return response()->json(['project'=> $project]);
     }
+    public function newTask(Request $request){
+        $task = new \App\Task;
+        $task->title = $request->title; 
+        $task->description = $request->description; 
+        $task->is_completed = false; 
+        $task->project_id = $request->project_id;
+        $task->save();
+        return response()->json(['response'=>'success']);
+    }
 
 }

@@ -25,19 +25,25 @@ function NewProject() {
     return (
         <div>
             <h2>Create a new project</h2>
-            <label>Title of the new project</label>
-            <input
-                type="text"
-                placeholder="Title"
-                onChange={event => setTitle(event.target.value)}
-            />
-            <label>Description of the project</label>
-            <input
-                type="text"
-                placeholder="Description"
-                onChange ={event => setDescription(event.target.value)}
-            />
-            <button onClick={e => createNewProject()}>Create Project</button>
+            <form>
+                <div className="form-group">
+                    <label>Title of project</label>
+                    <input className="form-control"
+                        type="text"
+                        placeholder="Title"
+                        onChange={event => setTitle(event.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Description of the project</label>
+                    <input className="form-control"
+                        type="text"
+                        placeholder="Description"
+                        onChange ={event => setDescription(event.target.value)}
+                    />
+                </div>
+                <button className="btn btn-primary" onClick={e => createNewProject()}>Create Project</button>
+            </form>
         </div>
     )
 }

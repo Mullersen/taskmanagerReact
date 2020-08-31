@@ -9,19 +9,22 @@ import NewProject from './NewProject.js';
 class App extends Component {
     render() {
       return (
-          <div>
-            <h2>Welcome to taskmanager</h2>
+          <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="navbar-nav mr-auto"> 
+            <Link to='/' className="navbar-brand">Taskmanager</Link>
+            <ul className="navbar-nav ml-auto">
               <li><Link to='/projects' className="nav-link"> Current Projects </Link></li>
               <li><Link to='/newproject' className="nav-link">New Project</Link></li>
             </ul>
             </nav>
             <hr />
-            <div>
-                <h3>Select an option in the menu to begin</h3>
-            </div>
+
             <Switch>
+                <Route exact path='/'>
+                    <div>
+                        <h3>Select an option in the menu to begin</h3>
+                    </div>
+                </Route>
                 <Route path='/projects'>
                     <Projects/>
                 </Route>

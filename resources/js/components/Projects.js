@@ -14,6 +14,11 @@ function Projects(){
     const [isLoaded, setIsLoaded] = useState(false);
     let { path, url } = useRouteMatch();
 
+    const cardStyle = {
+        maxWidth: 18 +'rem',
+        minWidth: 15 +'rem',
+    };
+
     useEffect(() => {
         Axios.get('/getprojects')
            .then(function (response) {
@@ -28,7 +33,7 @@ function Projects(){
 
     if(isLoaded == false){
         return(
-        <div>
+        <div className="container">
             <h2>Projects</h2>
             <p>You have no projects yet. Click 'New Project' to start one!</p>
         </div>
@@ -37,21 +42,23 @@ function Projects(){
 
     if(isLoaded == true){
         return(
-            <div>
+            <div className="container">
                 <h2>Projects</h2>
-                <div className="projects">
+                <div className="row">
                     {projects.map((project, index) =>(
-                        <Link to={`${url}/project/${project.title}`} key={index}>
-                            <div className="card" >
-                                <h3>{project.title}</h3>
-                                <p>{project.description}</p>
-                            </div>
-                        </Link>
+                        <div className="col" key={index}>
+                            <Link to={`${url}/project/${project.title}`} >
+                                <div className="card text-white bg-primary mb-3" style={cardStyle}>
+                                    <h3 className="card-title">{project.title}</h3>
+                                    <p className="card-text">{project.description}</p>
+                                </div>
+                            </Link>
+                        </div>
                     ))}
                 </div>
                 <Switch>
                     <Route exact path={path}>
-                    <h3>Please select a project</h3>
+                    <h3>Click on project to see the related tasks</h3>
                     </Route>
                     <Route path={`${path}/project/:projectTitle`}>
                         <MyProject/>
