@@ -19,7 +19,7 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->is_completed = false;
         $project->save();
-        return response()->json(['response'=>'success']);
+        return response()->json(['response'=> $project]);
     }
     public function getProject(Request $request){
         $project = \App\Project::where('title', $request->title)->with('tasks')->get();
@@ -31,9 +31,9 @@ class ProjectController extends Controller
         $task->title = $request->title; 
         $task->description = $request->description; 
         $task->is_completed = false; 
-        $task->project_id = $request->project_id;
+        $task->project_id = $request->project;
         $task->save();
-        return response()->json(['response'=>'success']);
+        return response()->json(['response'=> $task]);
     }
 
 }

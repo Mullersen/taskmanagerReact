@@ -17,6 +17,7 @@ function Projects(){
     const cardStyle = {
         maxWidth: 18 +'rem',
         minWidth: 15 +'rem',
+        minHeight: 10 +'rem',
     };
 
     useEffect(() => {
@@ -58,7 +59,7 @@ function Projects(){
                 </div>
                 <Switch>
                     <Route exact path={path}>
-                    <h3>Click on project to see the related tasks</h3>
+                        <h3>Click on project to see the related tasks</h3>
                     </Route>
                     <Route path={`${path}/project/:projectTitle`}>
                         <MyProject/>

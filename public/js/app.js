@@ -91203,10 +91203,9 @@ function MyProject() {
     if (isLoaded == true) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Created:", moment__WEBPACK_IMPORTED_MODULE_3___default()(project.created_at).fromNow()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, project.tasks.map(function (task, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "card"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "card",
           key: index
-        }, task.title));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, task.title));
       })));
     }
   };
@@ -91217,8 +91216,11 @@ function MyProject() {
     onClick: function onClick(e) {
       return setShowCreateTask(true);
     }
-  }, "Create task"), showCreateTask == true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewTask_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    project: projectTitle
+  }, "Create task"), showCreateTask == true &&
+  /*#__PURE__*/
+  //this is a conditional rendering in-line. The if statement is hidden, but exists, and when it resolves to true the NewTask will be rendered.
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NewTask_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    project: project.id
   }));
 }
 
@@ -91265,7 +91267,8 @@ function NewProject() {
       description = _useState4[0],
       setDescription = _useState4[1];
 
-  var createNewProject = function createNewProject() {
+  var createNewProject = function createNewProject(e) {
+    e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/uploadnewproject', {
       title: title,
       description: description
@@ -91273,15 +91276,18 @@ function NewProject() {
       console.log(response);
       setTitle("");
       setDescription("");
+      document.getElementById('tit').value = "";
+      document.getelementById('des').value = "";
     })["catch"](function (error) {
       console.log(error);
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Create a new project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Create a new project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title of project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "form-control",
+    id: "tit",
     type: "text",
     placeholder: "Title",
     onChange: function onChange(event) {
@@ -91291,6 +91297,7 @@ function NewProject() {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description of the project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "form-control",
+    id: "des",
     type: "text",
     placeholder: "Description",
     onChange: function onChange(event) {
@@ -91298,8 +91305,9 @@ function NewProject() {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-primary",
+    type: "button",
     onClick: function onClick(e) {
-      return createNewProject();
+      return createNewProject(e);
     }
   }, "Create Project")));
 }
@@ -91337,8 +91345,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function NewTask(props) {
-  var _this = this;
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       title = _useState2[0],
@@ -91349,26 +91355,35 @@ function NewTask(props) {
       description = _useState4[0],
       setDescription = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      task = _useState6[0],
+      setTask = _useState6[1];
+
   var saveNewTask = function saveNewTask() {
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/uploadnewtask', {
-      taskTitle: title,
-      taskDescription: description,
-      project_id: _this.props.project
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/task/uploadNewTask', {
+      title: title,
+      description: description,
+      project: props.project
     }).then(function (response) {
       console.log(response);
       setTitle("");
       setDescription("");
+      document.getElementById('tit').value = "";
+      document.getelementById('des').value = "";
+      setTask(response.data.response);
     })["catch"](function (error) {
       console.log(error);
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title of task"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
+    id: "tit",
     className: "form-control",
     placeholder: "Title",
     onChange: function onChange(event) {
@@ -91378,6 +91393,7 @@ function NewTask(props) {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description of task"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
+    id: "des",
     className: "form-control",
     placeholder: "description",
     onChange: function onChange(event) {
@@ -91385,6 +91401,7 @@ function NewTask(props) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-primary",
+    type: "button",
     onClick: function onClick(e) {
       return saveNewTask();
     }
@@ -91449,7 +91466,8 @@ function Projects() {
 
   var cardStyle = {
     maxWidth: 18 + 'rem',
-    minWidth: 15 + 'rem'
+    minWidth: 15 + 'rem',
+    minHeight: 10 + 'rem'
   };
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/getprojects').then(function (response) {

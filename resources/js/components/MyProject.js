@@ -38,8 +38,8 @@ function MyProject(){
                 <p>Created:{moment(project.created_at).fromNow()}</p>
                 <ul>
                     {project.tasks.map((task, index) =>(
-                        <div className="card">
-                            <li key={index}>{task.title}</li>
+                        <div className="card" key={index}>
+                            <li>{task.title}</li>
                         </div>
                     ))}
                 </ul>
@@ -55,8 +55,8 @@ function MyProject(){
             {renderProjectInfo()}
             <h2>Create task for project</h2>
             <button className="btn btn-light" id="createTask" onClick= {e => setShowCreateTask(true)}>Create task</button>
-            {showCreateTask == true &&
-            <NewTask project={projectTitle}/>
+            {showCreateTask == true && //this is a conditional rendering in-line. The if statement is hidden, but exists, and when it resolves to true the NewTask will be rendered.
+                <NewTask project={project.id}/>
             }
         </div>
     );

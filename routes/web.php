@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/uploadnewtask', 'ProjectController@newTask');
+
 Route::get('/getprojects', 'ProjectController@getProjects');
 Route::post('/getproject', 'ProjectController@getProject');
 Route::post('/uploadnewproject', 'ProjectController@newProject');
-Route::view('/{path?}', 'welcome');
+Route::post('/task/uploadNewTask', 'ProjectController@newTask');
+Route::view('/{path?}', 'welcome')->where('path', '.*');
